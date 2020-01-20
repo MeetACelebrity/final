@@ -225,9 +225,7 @@ export default function ProfileCard({
         return formatAddress({ name, county, country, city });
     }, [addresses, distance]);
 
-    const disableLikeButton = useMemo(() => {
-        return !userImages.some(({ imageNumber }) => imageNumber === 0);
-    }, [userImages]);
+    const disableLikeButton = !(userImages.length > 0);
 
     useEffect(() => {
         if (profilePicture === undefined) {

@@ -66,11 +66,14 @@ export default function profileRoutes(): express.Router {
                 // checking user data:
 
                 if (
-                    user.score === null ||
-                    user.gender === null ||
-                    user.biography === null ||
-                    user.tags === null ||
-                    user.addresses === null ||
+                    !Number.isInteger(user.score) ||
+                    !user.gender ||
+                    !user.biography ||
+                    !(Array.isArray(user.tags) && user.tags.length > 0) ||
+                    !(
+                        Array.isArray(user.addresses) &&
+                        user.addresses.length > 0
+                    ) ||
                     !(Array.isArray(user.images) && user.images.length > 0)
                 ) {
                     res.status(400);
