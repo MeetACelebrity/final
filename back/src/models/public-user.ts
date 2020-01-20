@@ -257,14 +257,15 @@ export async function userLike({
                 uuid = $1
         ), liker_id AS (
             SELECT
-                user_id.id AS "id"
+                user_id.id AS "id",
+                COUNT(*) AS "pictures_count"
             FROM
                 user_id,
                 profile_pictures
             WHERE
                 profile_pictures.user_id = user_id.id
-                    AND
-                profile_pictures.image_nb = 0
+            GROUP BY
+                user_id.id
         ), liked_id AS (
             SELECT
                 id
@@ -284,6 +285,8 @@ export async function userLike({
             liker_id,
             liked_id
         WHERE
+            liker_id.pictures_count > 0
+                AND
             is_blocked(liker_id.id, liked_id.id) = TRUE
         RETURNING
             is_matched(
@@ -358,14 +361,15 @@ export async function userUnLike({
                 uuid = $1
         ), liker_id AS (
             SELECT
-                user_id.id AS "id"
+                user_id.id AS "id",
+                COUNT(*) AS "pictures_count"
             FROM
                 user_id,
                 profile_pictures
             WHERE
                 profile_pictures.user_id = user_id.id
-                    AND
-                profile_pictures.image_nb = 0
+            GROUP BY
+                user_id.id
         ), liked_id AS (
             SELECT
                 id
@@ -380,6 +384,8 @@ export async function userUnLike({
             liker_id,
             liked_id
         WHERE
+            liker_id.pictures_count > 0
+        AND
             likes.liker = liker_id.id
         AND
             likes.liked = liked_id.id
