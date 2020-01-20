@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import FeathersIcon from 'feather-icons-react';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { AppContext } from '../app-context.js';
 import { API_ENDPOINT, useIsMounted } from '../constants.js';
@@ -164,6 +165,12 @@ export default function ConversationId({ id }) {
         const trimmedMessage = message.trim();
 
         if (conversation === undefined || trimmedMessage.length === 0) return;
+        if (trimmedMessage.length > 255) {
+            toast("Your message is too long, don't exceed 255 characters", {
+                type: 'error',
+            });
+            return;
+        }
 
         ws.publishMessage(id, trimmedMessage);
 
