@@ -119,7 +119,7 @@ function ProfileImage({ src, setContext, triggerToast }) {
                 <ChangePicture>
                     <input
                         type="file"
-                        accept="image/*"
+                        accept="image/png, image/jpeg, image/gif"
                         hidden
                         onChange={onFileChange}
                     />
