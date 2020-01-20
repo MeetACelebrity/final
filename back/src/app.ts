@@ -92,11 +92,14 @@ async function app() {
                     break;
                 }
                 case InMessageType.NEW_MESSAGE: {
+                    const trimmedMessage = body.payload.message.trim();
+                    if (trimmedMessage.length > 255) break;
+
                     const message = await createMessage({
                         db,
                         authorUuid: userUuid,
                         convUuid: body.payload.conversationId,
-                        payload: body.payload.message,
+                        payload: trimmedMessage,
                     });
 
                     if (message === null) break;
