@@ -251,7 +251,7 @@ export async function getConvs({
 
                           return {
                               uuid,
-                              username,
+                              username: username.replace(/['"]+/g, ''),
                               profilePic: srcToPath(
                                   convUser.slice(1, -1).split(',')[2]
                               ),
