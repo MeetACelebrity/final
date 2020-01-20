@@ -1599,15 +1599,17 @@ BEGIN
     -- Delete the conversation and the messages they had or do nothing.
     conversations_id := ARRAY(
         SELECT
-            conversations_users.conversation_id
-        FROM
-            conversations_users
-        INNER JOIN
-            users
-        ON
-            conversations_users.user_id = users.id
-        WHERE
-            users.uuid IN (blocker, blocked)
+            conversation_id 
+        FROM 
+            conversations_users 
+        WHERE 
+            user_id = (SELECT id FROM user WHERE uuid = $1)
+        OR 
+            user_id = (SELECT id FROM user WHERE uuid = $)
+        GROUP BY 
+            conversation_id 
+        HAVING 
+            count(conversation_id) > 1
     );
 
     DELETE FROM
