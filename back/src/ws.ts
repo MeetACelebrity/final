@@ -133,7 +133,6 @@ export class WS extends server {
             try {
                 if (!WS.isOriginAllowed(request.origin)) {
                     request.reject(403);
-                    console.error('This origin is not allowed', request.origin);
                     return;
                 }
 
@@ -141,13 +140,11 @@ export class WS extends server {
                     ({ name }) => name === 'connect.sid'
                 );
                 if (sid === undefined) {
-                    console.error('Did not find a correct SID, exit WS');
                     return;
                 }
 
                 const token = /:(.*)\./.exec(sid.value);
                 if (token === null) {
-                    console.error('incorrect token');
                     return;
                 }
 
@@ -186,7 +183,6 @@ export class WS extends server {
                             message.type !== 'utf8' ||
                             message.utf8Data === undefined
                         ) {
-                            console.error('incorrect data');
                             return;
                         }
 
@@ -194,11 +190,6 @@ export class WS extends server {
 
                         const validationResult = schema.one(body);
                         if (!validationResult) {
-                            console.error(
-                                'Invalid message',
-                                validationResult,
-                                body
-                            );
                             return;
                         }
 
@@ -208,9 +199,7 @@ export class WS extends server {
                             connection,
                             userUuid: uuid,
                         });
-                    } catch (e) {
-                        console.error('Error on message handler', e);
-                    }
+                    } catch (e) {}
                 });
 
                 connection.on('close', async (statusCode, description) => {
@@ -233,13 +222,9 @@ export class WS extends server {
                             description,
                             userUuid: uuid,
                         });
-                    } catch (e) {
-                        console.error('Error on close handler', e);
-                    }
+                    } catch (e) {}
                 });
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) {}
         });
     }
 
@@ -249,10 +234,7 @@ export class WS extends server {
             if (connections === undefined) continue;
 
             for (const { connection } of connections) {
-                connection.send(
-                    JSON.stringify(data),
-                    err => err && console.error(err)
-                );
+                connection.send(JSON.stringify(data), () => {});
             }
         }
     }
@@ -339,7 +321,7 @@ export class WS extends server {
         for (const { connection: conn } of connections) {
             if (conn === connection) continue;
 
-            conn.send(JSON.stringify(data), err => err && console.error(err));
+            conn.send(JSON.stringify(data), () => {});
         }
     }
 }

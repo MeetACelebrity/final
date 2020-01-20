@@ -156,7 +156,6 @@ export async function createConv({
 
         return result.create_conv;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -174,7 +173,6 @@ export async function deleteConv({
         } = await db.query(query, [uuid1, uuid2]);
         return result.delete_conv;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -209,7 +207,6 @@ export async function createMessage({
         }
         return null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -227,7 +224,6 @@ export async function deleteMessage({
         } = await db.query(query, [messageUuid, authorUuid]);
         return result.delete_message;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -280,7 +276,6 @@ export async function getConvs({
                     : null,
         }));
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -313,7 +308,6 @@ export async function getUserOfConv({ db, uuid }: Conv) {
             ),
         }));
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -422,7 +416,6 @@ export async function setNotif({
         });
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -445,7 +438,6 @@ export async function sawNotifications({
 
         return true;
     } catch (e) {
-        console.error(e);
         return false;
     }
 }
@@ -495,7 +487,6 @@ export async function getNotifs({ db, uuid }: Notif) {
             })
         );
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -518,7 +509,6 @@ export async function setSawMessagesToTrue({
 
         return rowCount === 1;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }

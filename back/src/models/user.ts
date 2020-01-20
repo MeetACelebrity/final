@@ -304,7 +304,6 @@ export async function score({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -367,7 +366,6 @@ export async function createUser({
         ]);
         return { token, uuid: id };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -400,7 +398,6 @@ export async function getUserByUsername({
 
         return user || null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -432,7 +429,6 @@ export async function getUserByEmail({
         } = await db.query(query, [email]);
         return user || null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -583,7 +579,6 @@ export async function getUserByUuid({
 
         return finalUser;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -639,7 +634,6 @@ export async function userVerify({
 
         return user || null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -683,7 +677,6 @@ export async function setPasswordReset({
         if (rowCount === 0) return null;
         return token;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -756,7 +749,6 @@ export async function resetingPassword({
         if (user === null) return null;
         return user || null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -789,7 +781,6 @@ export async function updateGeneralUser({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -816,7 +807,6 @@ export async function updatePasswordUser({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -900,7 +890,6 @@ export async function updateExtendedUser(
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -980,7 +969,6 @@ export async function updateBiography(
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1061,8 +1049,6 @@ export async function updateAddressReturnQuery({
     let args = [name, administrative, county, country, city];
 
     try {
-        console.log('lat: ', lat, ' | long: ', long);
-
         const addressInformations = await getAddressInformations(lat, long);
         if (addressInformations === null) {
             // We probably exceeded the maximum fetches tries.
@@ -1095,7 +1081,6 @@ export async function updateAddressReturnQuery({
             values: [uuid, isPrimary, lat, long, ...args],
         };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1113,7 +1098,6 @@ export async function updateAddress(
 
         return address.upsert_addresses;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1156,7 +1140,6 @@ export async function deleteAddress({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1180,7 +1163,6 @@ export async function updateLocation({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1204,7 +1186,6 @@ export async function updateRoaming({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1237,7 +1218,6 @@ export async function updateProfilePics(
 
         return image.upsert_profile_picture || null;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1256,7 +1236,6 @@ export async function insertPics({
         } = await db.query(query, [uuid1, newPics, uuid2]);
         return image;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1274,7 +1253,6 @@ export async function deletePics({
         } = await db.query(query, [uuid, pics]);
         return image.delete_picture;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1302,7 +1280,6 @@ export async function addTags(args: TagsArgs): Promise<string | null> {
         } = await args.db.query(query);
         return tags.upsert_tag;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1320,7 +1297,6 @@ export async function deleteTags({
         } = await db.query(query, [uuid, tag]);
         return tags.delete_tag;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1332,7 +1308,6 @@ export async function getTags({ db }: ModelArgs): Promise<Tags[] | null> {
         const { rows: tags } = await db.query(query);
         return tags;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -1357,8 +1332,6 @@ export async function getUsernameByUserUuid({
 
         return username;
     } catch (e) {
-        console.error(e);
-
         return undefined;
     }
 }

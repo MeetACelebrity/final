@@ -102,7 +102,6 @@ export async function getIntervals({
         } = await db.query(query, [uuid]);
         return { ...intervals };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -222,7 +221,6 @@ export async function proposals({
         );
         return { data, hasMore };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -352,7 +350,6 @@ export async function search({
         );
         return { datas, hasMore };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }

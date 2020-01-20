@@ -199,8 +199,6 @@ async function app() {
             // get all user data
             const user = await getUserByUuid({ db, uuid: req.session!.user });
 
-            console.log('gotten user =', user);
-
             const context: Context = {
                 templates,
                 db,
@@ -218,11 +216,9 @@ async function app() {
 
     routes(server);
 
-    httpServer.listen(8080, '0.0.0.0', () => {
-        console.log('Example app listening on port 8080!');
-    });
+    httpServer.listen(8080, '0.0.0.0', () => {});
 }
 
-app().catch(console.error);
+app().catch(() => {});
 
 process.on('unhandledRejection', () => {});

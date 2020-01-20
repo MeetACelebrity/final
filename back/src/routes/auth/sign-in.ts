@@ -75,7 +75,6 @@ export default function signInMiddleware(router: express.Router) {
             }
 
             if (await verify(user.password, req.body.password)) {
-                console.log('we will set the session to', user);
                 req.session!.user = user.uuid;
 
                 const result = await getUserByUuid({
@@ -96,7 +95,6 @@ export default function signInMiddleware(router: express.Router) {
             res.status(401);
             res.json({ statusCode: SignInStatusCode.PASSWORD_INCORRECT });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });

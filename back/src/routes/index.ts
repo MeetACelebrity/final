@@ -14,8 +14,6 @@ export default function routes(server: Express) {
     server.use('/user', publicUserRoutes());
     server.use('/match', matchingRoutes());
     server.get('/me', async (_, res) => {
-        console.log('context =', res.locals.user);
-
         if (res.locals.user === null) {
             res.json(res.locals.user);
             return;
@@ -38,7 +36,7 @@ export default function routes(server: Express) {
             }
             res.json({ result: 'ERROR' });
         } catch (e) {
-            console.error(e);
+            res.end();
         }
     });
 }

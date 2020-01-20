@@ -17,7 +17,7 @@ export default function authRoutes(): Router {
     setupResetPassword(router);
 
     router.get('/logout', (req, res) => {
-        req.session!.destroy(console.error);
+        req.session!.destroy(() => {});
     });
 
     return router;

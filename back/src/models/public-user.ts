@@ -156,7 +156,6 @@ export async function getVisitorsByUuid({
 
         return { data, hasMore };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -235,7 +234,6 @@ export async function getLikerByUuid({
             })),
         };
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -339,7 +337,6 @@ export async function userLike({
         });
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -424,7 +421,6 @@ export async function userUnLike({
         });
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -501,7 +497,6 @@ export async function userSee({
         });
         return liked;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -526,7 +521,6 @@ export async function userBlock({
         });
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -579,7 +573,6 @@ export async function userReport({
         });
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -626,7 +619,6 @@ export async function userNotInterested({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -660,7 +652,6 @@ export async function onlineUser({
         if (rowCount === 0) return null;
         return true;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }

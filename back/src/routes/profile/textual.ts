@@ -79,7 +79,7 @@ const passwordSchema: ValidatorObject = Validator.object().keys({
 });
 function passwordRouteValidation(req: express.Request): UpdateUserStatusCode {
     const validationResult = Validator.validate(passwordSchema, req.body);
-    console.log(validationResult);
+
     if (typeof validationResult !== 'boolean') {
         const {
             error: { concernedKey },
@@ -174,7 +174,7 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
+            res.end();
         }
     });
 
@@ -219,7 +219,7 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.PASSWORD_INCORRECT,
             });
         } catch (e) {
-            console.error(e);
+            res.end();
         }
     });
 
@@ -234,7 +234,6 @@ export default function setupTextual(router: express.Router) {
             }
             if (statusCode !== UpdateUserStatusCode.DONE) {
                 res.status(400);
-                console.log(statusCode);
                 res.json({
                     statusCode,
                 });
@@ -266,7 +265,7 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
+            res.end();
         }
     });
 
@@ -301,7 +300,7 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
+            res.end();
         }
     });
 
@@ -335,7 +334,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -361,7 +359,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -383,7 +380,6 @@ export default function setupTextual(router: express.Router) {
             });
             if (result !== 'DONE') {
                 res.status(404);
-                console.log('result null');
                 res.json({ statusCode: UpdateUserStatusCode.UNKNOWN_ERROR });
                 return;
             }
@@ -391,7 +387,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -417,7 +412,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -444,7 +438,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -471,7 +464,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -500,7 +492,6 @@ export default function setupTextual(router: express.Router) {
                 statusCode: UpdateUserStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -518,7 +509,6 @@ export default function setupTextual(router: express.Router) {
 
             res.json(result);
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });

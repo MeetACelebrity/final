@@ -119,7 +119,6 @@ export default function setupResetPassword(router: express.Router) {
             res.json({ statusCode: ResetPasswordStatusCode.DONE });
             return;
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -147,7 +146,6 @@ export default function setupResetPassword(router: express.Router) {
                 return;
             }
 
-            console.log('we will set the session to', user);
             req.session!.user = user.uuid;
 
             const userToSend = await getUserByUuid({
@@ -163,7 +161,6 @@ export default function setupResetPassword(router: express.Router) {
                         : internalUserToExternalUser(userToSend),
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });

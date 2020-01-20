@@ -23,11 +23,9 @@ export default function setupConfirmation(router: express.Router) {
                 return;
             }
 
-            console.log('we will set the session to', user);
             req.session!.user = user.uuid;
             res.redirect(FRONT_ENDPOINT);
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });

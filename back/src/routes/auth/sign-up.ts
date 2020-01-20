@@ -115,7 +115,6 @@ export default function signUpMiddleware(router: express.Router) {
                 userUuid: result.uuid,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });

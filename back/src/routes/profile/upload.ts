@@ -62,7 +62,6 @@ export default function setupUpload(router: express.Router) {
                 statusCode: UploadPicsStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -124,7 +123,6 @@ export default function setupUpload(router: express.Router) {
                 },
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
@@ -133,7 +131,6 @@ export default function setupUpload(router: express.Router) {
         try {
             const cloud = res.locals.cloud;
 
-            console.log(req.body.pics);
             // Delete pics in db
             const result = await deletePics({
                 db: res.locals.db,
@@ -153,7 +150,6 @@ export default function setupUpload(router: express.Router) {
                 statusCode: UploadPicsStatusCode.DONE,
             });
         } catch (e) {
-            console.error(e);
             res.sendStatus(400);
         }
     });
