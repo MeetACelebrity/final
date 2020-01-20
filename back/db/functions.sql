@@ -1605,7 +1605,7 @@ BEGIN
         WHERE 
             user_id = (SELECT id FROM user WHERE uuid = $1)
         OR 
-            user_id = (SELECT id FROM user WHERE uuid = $)
+            user_id = (SELECT id FROM user WHERE uuid = $2)
         GROUP BY 
             conversation_id 
         HAVING 
