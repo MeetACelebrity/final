@@ -89,7 +89,7 @@ export default function Home() {
     const [profiles, setProfiles] = useState([]);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const offsetsFetchedRef = useRef([]);
     const currentlyRunOffset = useRef(0);
@@ -166,10 +166,10 @@ export default function Home() {
         [isMounted, controller.signal]
     );
 
-    useEffect(() => {
-        // Fetch data on first load
-        fetchData(0, {});
-    }, [fetchData]);
+    // useEffect(() => {
+    //     // Fetch data on first load
+    //     fetchData(0, {});
+    // }, [fetchData]);
 
     useEffect(() => {
         return () => {
@@ -177,8 +177,10 @@ export default function Home() {
         };
     }, [controller]);
 
-    function fetchMore() {
-        fetchData(offset, body, true);
+    function fetchMore(state) {
+        const showLoader = state === undefined;
+
+        fetchData(offset, body, !showLoader);
     }
 
     function toggleCollapse() {
@@ -294,6 +296,7 @@ export default function Home() {
             </MyProfile>
 
             <ProfilesContainer
+                waitForLoading
                 ref={homeViewRef}
                 profiles={profiles}
                 onLike={onLike}

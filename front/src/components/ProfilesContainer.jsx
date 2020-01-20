@@ -56,8 +56,13 @@ function ShowFiltersButton({ onClick }) {
     );
 }
 
+const PressToLoadButton = styled.button`
+    ${tw`mx-auto my-3 px-2 py-1 bg-blue-700 text-white`}
+`;
+
 function ProfilesContainer(
     {
+        waitForLoading = false,
         search = false,
         profiles = [],
         preview = false,
@@ -72,6 +77,7 @@ function ProfilesContainer(
 ) {
     const [showFiltersDialog, setShowFiltersDialog] = useState(false);
     const [exited, setExited] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     function triggerModal(e) {
         e.stopPropagation();
@@ -80,6 +86,12 @@ function ProfilesContainer(
     }
 
     const onHide = useCallback(() => setShowFiltersDialog(false), []);
+
+    function onLoadProfiles() {
+        fetchMore();
+
+        setLoaded(true);
+    }
 
     return (
         <Container ref={ref} exited={exited}>
@@ -91,7 +103,8 @@ function ProfilesContainer(
                 onExited={() => setExited(true)}
             />
 
-            {!loading &&
+            {loaded || !waitForLoading ? (
+                !loading &&
                 (profiles.length > 0 ? (
                     <InfiniteScrollContainer
                         fetchMore={fetchMore}
@@ -114,7 +127,12 @@ function ProfilesContainer(
                     </InfiniteScrollContainer>
                 ) : (
                     <NoData />
-                ))}
+                ))
+            ) : (
+                <PressToLoadButton onClick={onLoadProfiles}>
+                    Load profiles
+                </PressToLoadButton>
+            )}
 
             <ShowFiltersButton onClick={triggerModal} />
 
