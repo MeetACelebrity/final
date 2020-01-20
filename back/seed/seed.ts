@@ -200,7 +200,7 @@ class User {
 }
 
 async function generateSeedFile(db: Database) {
-    const USERS_COUNT = 500;
+    const USERS_COUNT = 505;
 
     const queries: { text: string; values: any[] }[] = [];
 
