@@ -35,7 +35,7 @@ export default function AddPictureButton({ onChange }) {
                 <input
                     name="new-picture"
                     type="file"
-                    accept="image/*"
+                    accept="image/png, image/jpeg, image/gif"
                     hidden
                     onChange={onChange}
                 />
