@@ -30,6 +30,13 @@ export default function setupUpload(router: express.Router) {
 
             // Upload new pics in minio
             const fType = fileType(req.files.profile.data);
+            const authorizeType = ['png', 'jpg', 'gif'];
+
+            if (fType === undefined || !authorizeType.includes(fType.ext)) {
+                res.json({ statusCode: UploadPicsStatusCode.FORBIDDEN_FILE });
+                return;
+            }
+
             const newPics = `${uuid()}.${fType!.ext}`;
 
             await cloud.putObject(

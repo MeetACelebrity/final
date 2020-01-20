@@ -68,8 +68,10 @@ export default function profileRoutes(): express.Router {
                 if (
                     user.score === null ||
                     user.gender === null ||
+                    user.biography === null ||
                     user.tags === null ||
-                    user.addresses === null
+                    user.addresses === null ||
+                    (Array.isArray(user.images) && user.images.length > 0)
                 ) {
                     res.status(400);
                     res.json({
