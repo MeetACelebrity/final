@@ -4,7 +4,8 @@
 
 # Setup Docker env
 
-    Don't forget to initialize the Docker environment using `eval $(docker-machine env yolo)` in each terminal.
+    Don't forget to initialize the Docker environment using `eval $(docker-machine env <machine name>)` in each terminal.
+    Be sure that the docker-machine ip (docker-machine ip <machine name>) is correctly set in the .env files.
 
 # Sart Back (including API, BD and minio Cloud)
 
