@@ -4,6 +4,7 @@ import React, {
     useMemo,
     useEffect,
     useCallback,
+    useContext,
 } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
@@ -13,6 +14,7 @@ import { toast } from 'react-toastify';
 import MyProfile from '../components/MyProfile.jsx';
 import ProfilesContainer from '../components/ProfilesContainer.jsx';
 import { API_ENDPOINT, fetcher, useIsMounted } from '../constants.js';
+import { AppContext } from '../app-context.js';
 
 const ClosingContainer = styled.button`
     ${tw`absolute py-2 w-6 flex justify-center items-center bg-blue-700 text-white rounded-r opacity-25`}
@@ -83,6 +85,9 @@ const Container = styled.section`
 export default function Home() {
     const LIMIT = 5;
 
+    const {
+        context: { user },
+    } = useContext(AppContext);
     const [collapse, setCollapse] = useState(false);
     const homeViewRef = useRef(null);
     const [body, setBody] = useState({});
@@ -166,10 +171,24 @@ export default function Home() {
         [isMounted, controller.signal]
     );
 
-    // useEffect(() => {
-    //     // Fetch data on first load
-    //     fetchData(0, {});
-    // }, [fetchData]);
+    useEffect(() => {
+        const filledUser =
+            Number.isInteger(user.score) &&
+            user.gender &&
+            user.biography &&
+            Array.isArray(user.tags) &&
+            user.tags.length > 0 &&
+            Array.isArray(user.addresses) &&
+            user.addresses.length > 0 &&
+            Array.isArray(user.images) &&
+            user.images.length > 0;
+
+        if (filledUser) return;
+
+        toast('Complete your profile guy! 😛', {
+            type: 'info',
+        });
+    }, [user]);
 
     useEffect(() => {
         return () => {
