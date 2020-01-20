@@ -1,3 +1,7 @@
+# Where to clone ?
+
+    Clone into the Desktop because here we have enough rights to execute Docker.
+
 # Setup Docker env
 
     Don't forget to initialize the Docker environment using `eval $(docker-machine env yolo)` in each terminal.
