@@ -1603,9 +1603,9 @@ BEGIN
         FROM 
             conversations_users 
         WHERE 
-            user_id = (SELECT id FROM user WHERE uuid = $1)
+            user_id = (SELECT id FROM users WHERE uuid = $1)
         OR 
-            user_id = (SELECT id FROM user WHERE uuid = $2)
+            user_id = (SELECT id FROM users WHERE uuid = $2)
         GROUP BY 
             conversation_id 
         HAVING 
